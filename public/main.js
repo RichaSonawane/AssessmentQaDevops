@@ -118,13 +118,13 @@ const putBotBack = (id) => {
 }
 
 const drawFive = () => {
-    axios.get('http://localhost:4000/api/robots/five')
-        .then(res => {
-            choices = res.data.choices
-            compDuo = res.data.compDuo
-            renderChoices()
-            drawBtn.classList.add('hide')
-        })
+    axios.get("http://18.118.218.3/")
+    .then((res) => {
+      choices = res.data.choices;
+      compDuo = res.data.compDuo;
+      renderChoices();
+      drawBtn.classList.add("hide");
+    });
 }
 
 const duel = () => {
@@ -135,12 +135,13 @@ const duel = () => {
     renderCompDuo()
     document.querySelectorAll('.bot-btn').forEach(btn => btn.classList.add('hide'))
     setTimeout(() => {
-        axios.post('http://localhost:4000/api/duel', {compDuo, playerDuo})
-            .then(({data}) => {
-                resultsText.textContent = data
-                playAgainBtn.classList.remove('hide')
-                getPlayerStats()
-            })
+        axios
+          .post("http://18.118.218.3/api/duel", { compDuo, playerDuo })
+          .then(({ data }) => {
+            resultsText.textContent = data;
+            playAgainBtn.classList.remove("hide");
+            getPlayerStats();
+          });
     }, 1500)
 }
 
@@ -158,23 +159,23 @@ const reset = () => {
 }
 
 const getPlayerStats = () => {
-    axios.get('http://localhost:4000/api/player')
-        .then(({data: {wins, losses}}) => {
-            winsText.textContent = `Wins: ${wins}`
-            lossesTest.textContent = `Losses: ${losses}`
-        })
+    axios.get("http://18.118.218.3/api/player")
+      .then(({ data: { wins, losses } }) => {
+        winsText.textContent = `Wins: ${wins}`;
+        lossesTest.textContent = `Losses: ${losses}`;
+      });
 }
 
 const getAllBots = () => {
-    axios.get('http://localhost:4000/api/robots')
-        .then(({data}) => {
-            allBotsDiv.innerHTML = ''
-        
-            data.forEach(bot => {
-                let botHtml = makeRobotDisplayCard(bot)
-                allBotsDiv.innerHTML += botHtml
-            })
-        })
+    axios.get("http://18.118.218.3/api/robots")
+    .then(({ data }) => {
+      allBotsDiv.innerHTML = "";
+
+      data.forEach((bot) => {
+        let botHtml = makeRobotDisplayCard(bot);
+        allBotsDiv.innerHTML += botHtml;
+      });
+    });
 }
 
 drawBtn.addEventListener('click', drawFive)
