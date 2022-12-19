@@ -1,5 +1,4 @@
 const {shuffleArray} = require('./utils')
-const { bots, playerRecord } = require("./data");
 let testdata = [1,2,3,4,5];
 
 describe('shuffleArray should', () => {
